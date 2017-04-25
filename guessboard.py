@@ -4,7 +4,7 @@ from time import sleep
 class GuessBoard:
 
     # Holds the number of hits required to win
-    HITS_TO_WIN = 5  # Change to 17
+    HITS_TO_WIN = 17
     # Holds the current number of hits
     hit_count = 0
 

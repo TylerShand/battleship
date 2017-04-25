@@ -4,9 +4,9 @@ from guessboard import GuessBoard
 
 
 SHIP_INFO = [
-    # ("Aircraft Carrier", 5),
-    # ("Battleship", 4),
-    # ("Submarine", 3),
+    ("Aircraft Carrier", 5),
+    ("Battleship", 4),
+    ("Submarine", 3),
     ("Cruiser", 3),
     ("Patrol Boat", 2)
 ]
@@ -61,9 +61,9 @@ def reset_boards():
         ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
     ]
     p1_ship_coords = {
-        # 'Aircraft Carrier': [],
-        # 'Battleship': [],
-        # 'Submarine': [],
+        'Aircraft Carrier': [0, []],
+        'Battleship': [0, []],
+        'Submarine': [0, []],
         'Cruiser': [0, []],
         'Patrol Boat': [0, []]
     }
@@ -93,9 +93,9 @@ def reset_boards():
         ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
     ]
     p2_ship_coords = {
-        # 'Aircraft Carrier': [],
-        # 'Battleship': [],
-        # 'Submarine': [],
+        'Aircraft Carrier': [0, []],
+        'Battleship': [0, []],
+        'Submarine': [0, []],
         'Cruiser': [0, []],
         'Patrol Boat': [0, []]
     }
@@ -208,7 +208,6 @@ class Game:
             p1_ship_board.place_ship(ship)
             clear_screen()
             display_boards(player1, P1_BOARD, P1_GUESSES_BOARD)
-            print(p1_ship_board.ship_coords)
 
         end_turn(player2)
 
@@ -219,7 +218,6 @@ class Game:
             p2_ship_board.place_ship(ship)
             clear_screen()
             display_boards(player2, P2_BOARD, P2_GUESSES_BOARD)
-            print(p2_ship_board.ship_coords)
 
         end_turn(player1)
 
@@ -229,12 +227,10 @@ class Game:
 
             # Player 1's turn
             display_boards(player1, P1_BOARD, P1_GUESSES_BOARD)
-            print(p1_ship_coords['Patrol Boat'])
-            print(p1_ship_coords['Cruiser'])
             p1_guess_board.get_guess()
             clear_screen()
             display_boards(player1, P1_BOARD, P1_GUESSES_BOARD)
-            sleep(2)
+            sleep(1.5)
 
             # Check for game end
             if p1_guess_board.hit_count == p1_guess_board.HITS_TO_WIN:
@@ -250,12 +246,10 @@ class Game:
 
             # Player 2's turn
             display_boards(player2, P2_BOARD, P2_GUESSES_BOARD)
-            print(p2_ship_coords['Patrol Boat'])
-            print(p2_ship_coords['Cruiser'])
             p2_guess_board.get_guess()
             clear_screen()
             display_boards(player2, P2_BOARD, P2_GUESSES_BOARD)
-            sleep(2)
+            sleep(1.5)
 
             # Check for game end
             if p2_guess_board.hit_count == p2_guess_board.HITS_TO_WIN:
