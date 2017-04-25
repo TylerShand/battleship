@@ -230,7 +230,7 @@ class Game:
             p1_guess_board.get_guess()
             clear_screen()
             display_boards(player1, P1_BOARD, P1_GUESSES_BOARD)
-            sleep(1.5)
+            sleep(1)
 
             # Check for game end
             if p1_guess_board.hit_count == p1_guess_board.HITS_TO_WIN:
@@ -249,7 +249,7 @@ class Game:
             p2_guess_board.get_guess()
             clear_screen()
             display_boards(player2, P2_BOARD, P2_GUESSES_BOARD)
-            sleep(1.5)
+            sleep(1)
 
             # Check for game end
             if p2_guess_board.hit_count == p2_guess_board.HITS_TO_WIN:
