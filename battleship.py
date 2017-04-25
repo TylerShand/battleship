@@ -21,15 +21,19 @@ SUNK = '#'
 
 P1_BOARD = None
 P1_GUESSES_BOARD = None
+p1_ship_coords = None
 P2_BOARD = None
 P2_GUESSES_BOARD = None
+p2_ship_coords = None
 
 
 def reset_boards():
     global P1_BOARD
     global P1_GUESSES_BOARD
+    global p1_ship_coords
     global P2_BOARD
     global P2_GUESSES_BOARD
+    global p2_ship_coords
 
     P1_BOARD = [
         ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
@@ -56,7 +60,13 @@ def reset_boards():
         ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
         ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
     ]
-
+    p1_ship_coords = {
+        # 'Aircraft Carrier': [],
+        # 'Battleship': [],
+        # 'Submarine': [],
+        'Cruiser': [0, []],
+        'Patrol Boat': [0, []]
+    }
     P2_BOARD = [
         ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
         ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
@@ -82,6 +92,13 @@ def reset_boards():
         ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
         ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
     ]
+    p2_ship_coords = {
+        # 'Aircraft Carrier': [],
+        # 'Battleship': [],
+        # 'Submarine': [],
+        'Cruiser': [0, []],
+        'Patrol Boat': [0, []]
+    }
 
 
 def clear_screen():
@@ -104,12 +121,13 @@ def print_board(board):
 
 def display_boards(player, ship_board, guess_board):
     print('{}\'s turn'.format(player))
-    print()
+    print()  # Add a blank line
     print('Guesses:')
     print_board(guess_board)
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     print('Ships:')
     print_board(ship_board)
+    print()  # Add a blank line
 
 
 def end_turn(player):
@@ -118,6 +136,16 @@ def end_turn(player):
     input('{}, hit ENTER to continue.'.format(player))
     clear_screen()
 
+def display_end_screen(player1, player1_board, player2, player2_board):
+    # Player 1 and player 2 here do not refer to the actually players in the game,
+    # They refer to the order within just this function
+    print('{} is the winner!'.format(player1))
+    print('{}\'s board:'.format(player1))
+    print_board(player1_board)
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    print('{}\'s board:'.format(player2))
+    print_board(player2_board)
+    print()  # Add a blank line
 
 class Game:
 
@@ -138,6 +166,14 @@ class Game:
         # Setup boards
         p1_ship_board = ShipBoard(
             P1_BOARD,
+            p1_ship_coords,
+            BOARD_SIZE,
+            VERTICAL_SHIP,
+            HORIZONTAL_SHIP
+        )
+        p2_ship_board = ShipBoard(
+            P2_BOARD,
+            p2_ship_coords,
             BOARD_SIZE,
             VERTICAL_SHIP,
             HORIZONTAL_SHIP
@@ -145,21 +181,17 @@ class Game:
         p1_guess_board = GuessBoard(
             P1_GUESSES_BOARD,
             P2_BOARD,
+            p2_ship_board.ship_coords,
             MISS,
             HIT,
             SUNK,
             VERTICAL_SHIP,
             HORIZONTAL_SHIP
         )
-        p2_ship_board = ShipBoard(
-            P2_BOARD,
-            BOARD_SIZE,
-            VERTICAL_SHIP,
-            HORIZONTAL_SHIP
-        )
         p2_guess_board = GuessBoard(
             P2_GUESSES_BOARD,
             P1_BOARD,
+            p1_ship_board.ship_coords,
             MISS,
             HIT,
             SUNK,
@@ -174,6 +206,7 @@ class Game:
             p1_ship_board.place_ship(ship)
             clear_screen()
             display_boards(player1, P1_BOARD, P1_GUESSES_BOARD)
+            print(p1_ship_board.ship_coords)
 
         end_turn(player2)
 
@@ -184,6 +217,7 @@ class Game:
             p2_ship_board.place_ship(ship)
             clear_screen()
             display_boards(player2, P2_BOARD, P2_GUESSES_BOARD)
+            print(p2_ship_board.ship_coords)
 
         end_turn(player1)
 
@@ -193,14 +227,17 @@ class Game:
 
             # Player 1's turn
             display_boards(player1, P1_BOARD, P1_GUESSES_BOARD)
+            print(p1_ship_coords['Patrol Boat'])
+            print(p1_ship_coords['Cruiser'])
             p1_guess_board.get_guess()
             clear_screen()
             display_boards(player1, P1_BOARD, P1_GUESSES_BOARD)
+            sleep(2)
 
             # Check for game end
             if p1_guess_board.hit_count == p1_guess_board.HITS_TO_WIN:
                 clear_screen()
-                print('{} is the winner!'.format(player1))
+                display_end_screen(player1, P1_BOARD, player2, P2_BOARD)
                 replay = input('Do you want to play again? ')
                 if self.play_again(replay):
                     self.play()
@@ -211,14 +248,17 @@ class Game:
 
             # Player 2's turn
             display_boards(player2, P2_BOARD, P2_GUESSES_BOARD)
+            print(p2_ship_coords['Patrol Boat'])
+            print(p2_ship_coords['Cruiser'])
             p2_guess_board.get_guess()
             clear_screen()
             display_boards(player2, P2_BOARD, P2_GUESSES_BOARD)
+            sleep(2)
 
             # Check for game end
             if p2_guess_board.hit_count == p2_guess_board.HITS_TO_WIN:
                 clear_screen()
-                print('{} is the winner!'.format(player1))
+                display_end_screen(player2, P2_BOARD, player1, P1_BOARD)
                 replay = input('Do you want to play again? ')
                 self.play_again(replay)
                 if self.play_again(replay):
