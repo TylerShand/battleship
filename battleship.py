@@ -136,9 +136,10 @@ def end_turn(player):
     input('{}, hit ENTER to continue.'.format(player))
     clear_screen()
 
+
 def display_end_screen(player1, player1_board, player2, player2_board):
-    # Player 1 and player 2 here do not refer to the actually players in the game,
-    # They refer to the order within just this function
+    # Player 1 and player 2 here do not refer to the actually players
+    # in the game; they refer to the order within just this function.
     print('{} is the winner!'.format(player1))
     print('{}\'s board:'.format(player1))
     print_board(player1_board)
@@ -146,6 +147,7 @@ def display_end_screen(player1, player1_board, player2, player2_board):
     print('{}\'s board:'.format(player2))
     print_board(player2_board)
     print()  # Add a blank line
+
 
 class Game:
 

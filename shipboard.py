@@ -3,7 +3,8 @@ from time import sleep
 
 class ShipBoard:
 
-    def __init__(self, board, ship_coords, BOARD_SIZE, VERTICAL_SHIP, HORIZONTAL_SHIP):
+    def __init__(self, board, ship_coords, BOARD_SIZE, VERTICAL_SHIP,
+                 HORIZONTAL_SHIP):
         self.board = board
         self.ship_coords = ship_coords
         self.BOARD_SIZE = BOARD_SIZE
@@ -113,7 +114,9 @@ class ShipBoard:
                     print('ERROR: hit existing ship.')
                     return self.place_ship(ship)
                 self.board[number - i][letter] = self.VERTICAL_SHIP
-                self.ship_coords[ship_name][1].append(str(letter) + str(number - i))
+                self.ship_coords[ship_name][1].append(
+                    str(letter) + str(number - i)
+                )
 
         if direction == 'down':
             for i in range(0, ship_size):
@@ -124,7 +127,9 @@ class ShipBoard:
                     print('ERROR: hit existing ship.')
                     return self.place_ship(ship)
                 self.board[number + i][letter] = self.VERTICAL_SHIP
-                self.ship_coords[ship_name][1].append(str(letter) + str(number + i))
+                self.ship_coords[ship_name][1].append(
+                    str(letter) + str(number + i)
+                )
 
         if direction == 'left':
             for i in range(0, ship_size):
@@ -135,7 +140,9 @@ class ShipBoard:
                     print('ERROR: hit existing ship.')
                     return self.place_ship(ship)
                 self.board[number][letter - i] = self.HORIZONTAL_SHIP
-                self.ship_coords[ship_name][1].append(str(letter - i) + str(number))
+                self.ship_coords[ship_name][1].append(
+                    str(letter - i) + str(number)
+                )
         if direction == 'right':
             for i in range(0, ship_size):
                 if self.board[number][letter + i] == self.VERTICAL_SHIP:
@@ -145,5 +152,6 @@ class ShipBoard:
                     print('ERROR: hit existing ship.')
                     return self.place_ship(ship)
                 self.board[number][letter + i] = self.HORIZONTAL_SHIP
-                self.ship_coords[ship_name][1].append(str(letter + i) + str(number))
-        return None
+                self.ship_coords[ship_name][1].append(
+                    str(letter + i) + str(number)
+                )

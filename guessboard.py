@@ -48,10 +48,11 @@ class GuessBoard:
 
         count = 0
 
-        if (guess_pos == self.VERTICAL_SHIP
-                or guess_pos == self.HORIZONTAL_SHIP):
+        if (guess_pos == self.VERTICAL_SHIP or
+                guess_pos == self.HORIZONTAL_SHIP):
             self.guess_board[coordinate_number][coordinate_letter] = self.HIT
-            self.opponent_board[coordinate_number][coordinate_letter] = self.HIT
+            self.opponent_board[coordinate_number][coordinate_letter] = \
+                self.HIT
             self.hit_count += 1
             for ship in self.ship_coords.keys():
                 if ((str(coordinate_letter) + str(coordinate_number))
@@ -72,16 +73,3 @@ class GuessBoard:
             self.guess_board[coordinate_number][coordinate_letter] = self.MISS
             print('MISS!')
             sleep(1)
-
-
-
-
-
-
-
-
-
-
-
-
-
