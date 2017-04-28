@@ -4,10 +4,10 @@ from guessboard import GuessBoard
 
 
 SHIP_INFO = [
-    # ("Aircraft Carrier", 5),
-    # ("Battleship", 4),
-    # ("Submarine", 3),
-    # ("Cruiser", 3),
+    ("Aircraft Carrier", 5),
+    ("Battleship", 4),
+    ("Submarine", 3),
+    ("Cruiser", 3),
     ("Patrol Boat", 2)
 ]
 
@@ -61,10 +61,10 @@ def reset_boards():
         ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
     ]
     p1_ship_coords = {
-        # 'Aircraft Carrier': [0, []],
-        # 'Battleship': [0, []],
-        # 'Submarine': [0, []],
-        # 'Cruiser': [0, []],
+        'Aircraft Carrier': [0, []],
+        'Battleship': [0, []],
+        'Submarine': [0, []],
+        'Cruiser': [0, []],
         'Patrol Boat': [0, []]
     }
     P2_BOARD = [
@@ -93,10 +93,10 @@ def reset_boards():
         ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
     ]
     p2_ship_coords = {
-        # 'Aircraft Carrier': [0, []],
-        # 'Battleship': [0, []],
-        # 'Submarine': [0, []],
-        # 'Cruiser': [0, []],
+        'Aircraft Carrier': [0, []],
+        'Battleship': [0, []],
+        'Submarine': [0, []],
+        'Cruiser': [0, []],
         'Patrol Boat': [0, []]
     }
 
