@@ -71,6 +71,7 @@ class ShipBoard:
 
         coordinates = placement[0]
         coordinate_letter = placement[0][0]
+        # Catch possible ValueErrors in the ship placement
         try:
             coordinate_number = int(placement[0][1])
         except ValueError:

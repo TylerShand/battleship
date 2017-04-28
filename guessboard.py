@@ -34,11 +34,13 @@ class GuessBoard:
         error_message = 'ERROR: Incorrect input'
         if guess[0] in 'abcdefghij':
             if len(guess) == 3:
+                # Catches possible value errors in the input
                 try:
                     int(guess[1:])
                 except ValueError:
                     print(error_message)
                     return self.get_guess()
+                # Checks if the guess is out of range
                 if int(guess[1:]) > 10:
                     print(error_message)
                     return self.get_guess()
@@ -55,6 +57,7 @@ class GuessBoard:
 
     # Checks if the guess is a hit or miss and displays it accordingly
     def check_guess(self, guess):
+        # Used a try/except to check ValueErrors in user input
         try:
             coordinate_letter = ord(guess[0]) - 97
             coordinate_number = int(guess[1])
