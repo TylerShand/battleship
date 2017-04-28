@@ -31,19 +31,36 @@ class GuessBoard:
 
     # Makes sure the guess in a standard format
     def format_guess(self, guess):
-        if len(guess) == 3:
-            guess = guess[0] + str(int(guess[1:]) - 1)
-        elif len(guess) == 2:
-            guess = guess[0] + str(int(guess[1]) - 1)
+        error_message = 'ERROR: Incorrect input'
+        if guess[0] in 'abcdefghij':
+            if len(guess) == 3:
+                try:
+                    int(guess[1:])
+                except ValueError:
+                    print(error_message)
+                    return self.get_guess()
+                if int(guess[1:]) > 10:
+                    print(error_message)
+                    return self.get_guess()
+                guess = guess[0] + str(int(guess[1:]) - 1)
+            elif len(guess) == 2:
+                guess = guess[0] + str(int(guess[1]) - 1)
+            else:
+                print(error_message)
+                return self.get_guess()
         else:
-            print('ERROR: Incorrect input')
+            print(error_message)
             return self.get_guess()
         return self.check_guess(guess)
 
     # Checks if the guess is a hit or miss and displays it accordingly
     def check_guess(self, guess):
-        coordinate_letter = ord(guess[0]) - 97
-        coordinate_number = int(guess[1])
+        try:
+            coordinate_letter = ord(guess[0]) - 97
+            coordinate_number = int(guess[1])
+        except ValueError:
+            print('ERROR: Incorrect input')
+            return self.get_guess()
         guess_pos = self.opponent_board[coordinate_number][coordinate_letter]
 
         count = 0

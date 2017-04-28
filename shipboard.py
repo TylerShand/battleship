@@ -71,15 +71,20 @@ class ShipBoard:
 
         coordinates = placement[0]
         coordinate_letter = placement[0][0]
-        coordinate_number = placement[0][1]
+        try:
+            coordinate_number = int(placement[0][1])
+        except ValueError:
+            print(error_message)
+            return self.place_ship(ship)
 
+        # Handle border collisions
         if direction == 'up':
-            if int(coordinate_number) - ship_size <= 0:
+            if coordinate_number - ship_size <= 0:
                 print(error_message.format('TOP'))
                 sleep(1)
                 return self.place_ship(ship)
         if direction == 'down':
-            if int(coordinate_number) + ship_size > self.BOARD_SIZE:
+            if coordinate_number + ship_size > self.BOARD_SIZE:
                 print(error_message.format('BOTTTOM'))
                 sleep(1)
                 return self.place_ship(ship)
